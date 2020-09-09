@@ -1,0 +1,33 @@
+library(tidytext)
+library(tm)
+library(stringr)
+library(dplyr)
+rest <- read.csv("~/Predic/Project/restaurants_curated.csv")
+
+#Get sentiment score for positive words
+positive_counts <- function(review) {
+ text <- strsplit(as.character(review), "'")[[1]]
+if(length(text) == 0){
+return(0)
+ }
+ text_df <- tibble(text = text, line = 1:length(text)) #
+ text_df <- text_df %>% unnest_tokens(word, text)
+ 
+# Compute sentiment score
+ bing <- get_sentiments("bing")
+ 
+# Count number of positive terms
+ summarise (n = n()) %>%
+ 
+# Filter positive counts
+ filter(sentiment == "positive")
+if(length(ret$n) == 0){
+return(0)
+ } else{
+return(ret$n)
+ }
+}
+test <- lapply(rest$Review, positive_counts) %>% unlist
+rest$sentiment_count <- test
+
+#Please note this is the work sample version of the code. 
