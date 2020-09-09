@@ -1,0 +1,14 @@
+#Cleaning Data Up
+rest2 <- select(rest, City, Ranking2, Number.of.Reviews, Price.Range, cuisine,Rating)
+well <- complete.cases(rest2)
+sum(well)
+
+# Look at where NA values are
+na.vals <- apply(rest2, 2, function(x) sum(is.na(x)))
+na.vals 
+rest2 <- mutate(rest2, reviews2 = ifelse(is.na(Number.of.Reviews), 0, Number.of.Review
+s))
+
+# Look at where NA values are
+na.vals <- apply(rest2, 2, function(x) sum(is.na(x)))
+print(na.vals)
