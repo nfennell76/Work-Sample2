@@ -1,0 +1,18 @@
+library(ggplot2)
+
+#Historgram of new column cuisine
+rest_count <-
+ rest %>% group_by(cuisine) %>%
+ summarise (n = n()) %>%
+ filter(n > 600)
+ 
+#Historgram of transformed cuisine
+ggplot(rest_count, aes(x = reorder(cuisine,n), y = n, col=cuisine)) +
+ geom_col() +
+ coord_flip()+ theme(legend.position="none") +
+ labs(x = "Count", y = "Cuisine ", title = "Count of Cuisine Styles") 
+ 
+ #Jitter Plot
+ ggplot(rest, aes(x= Rating, y = Ranking2)) +
+ geom_jitter(alpha = 0.2, size = 0.4, color = "darkviolet")+
+labs(x = "Rating", y = "Ranking", title = "Jitter Plot of Ranking vs Rating") 
