@@ -1,0 +1,13 @@
+#Fitting the tree on the training data
+library(tree)
+rest.fit.tree = tree(Ranking2 ~sentiment_count+Price.Range+City+reviews2+Rating,data=rest[train.rest,])
+
+#Creating a Regression tree
+rest.fit.tree 
+
+# See tree results
+summary(rest.fit.tree) # Basic tree results
+
+# Plot the tree
+plot(rest.fit.tree)
+text(rest.fit.tree, pretty=0)
